@@ -159,7 +159,7 @@ To set up the project for development:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/fabrikspacec/fabrik-viewer.git
+    git clone https://github.com/fabrik-space/viewer.git
     ```
 2. **Install dependencies**:
     ```bash
@@ -190,5 +190,5 @@ This project is licensed under the ISC License.
 
 ## Support
 
-If you encounter any problems or have any questions, please open an issue on the [GitHub repository](https://github.com/fabrikspace/fabrik-viewer/issues).
+If you encounter any problems or have any questions, please open an issue on the [GitHub repository](https://github.com/fabrik-space/viewer/issues).
 
