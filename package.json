@@ -1,6 +1,6 @@
 {
   "name": "@fabrikspace/viewer",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -28,6 +28,7 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/rollup-plugin-peer-deps-external": "^2.2.5",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

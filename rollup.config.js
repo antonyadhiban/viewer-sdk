@@ -22,6 +22,7 @@ export default {
       tsconfig: './tsconfig.json',
       declaration: true,
       declarationDir: './dist',
+      exclude: ['src/main.tsx', 'src/App.tsx'],
     }),
   ],
   external: ['react', 'react-dom', '@react-three/fiber', '@react-three/drei', 'three'],
