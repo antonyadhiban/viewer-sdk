@@ -4,8 +4,7 @@ import { PerspectiveCamera, OrbitControls, Text } from '@react-three/drei';
 import { StepData } from '../types';
 import Model from './Model';
 import Hotspot from './Hotspot';
-import * as THREE from 'three';
-import { Root } from '@react-three/uikit';
+import { Color } from 'three';
 
 interface StepProps {
   stepData: StepData;
@@ -19,7 +18,7 @@ const Step: React.FC<StepProps> = ({ stepData, onStepChange, modelUrls }) => {
 
   useEffect(() => {
     if (stepData.step_info.properties.bgColor) {
-      scene.background = new THREE.Color(stepData.step_info.properties.bgColor);
+      scene.background = new Color(stepData.step_info.properties.bgColor);
     }
     setHotspotsEnabled(!stepData.hotspot_disabled);
   }, [stepData, scene]);
@@ -60,7 +59,9 @@ const Step: React.FC<StepProps> = ({ stepData, onStepChange, modelUrls }) => {
       {stepData.step_model_url
         .filter(model => model.custom_model_type === "3D text")
         .map((textData, index) => {
-          const textProperties = textData.mesh_properties.find(prop => prop.name === textData.name)?.properties || {};
+          if (!textData.mesh_properties) return null;
+          const textProperties = textData.mesh_properties.find(prop => prop.name === textData.name)?.properties;
+          if (!textProperties) return null;
           const { position, rotation, scale } = textProperties;
           const color = textProperties.mesh_color || '#ffffff';
           return (

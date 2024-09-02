@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Viewer } from './Viewer';
+import {version} from '../package.json';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [cpd, setCpd] = useState(null);
 
   useEffect(() => {
+    console.log(`Fabrik Viewer ${version}`);
     // load cpd.json
     fetch("cpd.json").then((res) => res.json()).then((cpd) => {
-      console.log(cpd);
       setCpd(cpd);
     });
   }, []);

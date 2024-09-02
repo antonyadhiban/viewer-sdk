@@ -1,6 +1,7 @@
-import { Box, useGLTF } from '@react-three/drei';
-import { ModelData } from '../types';
+import { useGLTF } from '@react-three/drei';
+import { ModelData, MeshProperty } from '../types';
 import { useEffect } from 'react';
+import { Mesh } from 'three';
 
 interface ModelProps {
   modelUrl: string;
@@ -15,9 +16,8 @@ const Model: React.FC<ModelProps> = ({ modelUrl, modelData }) => {
 
   useEffect(() => {
     if (scene) {
-      modelData.mesh_properties.forEach(meshProp => {
+      modelData.mesh_properties?.forEach((meshProp: MeshProperty) => {
         if (typeof meshProp.properties === 'object') {
-          console.log(meshProp.properties);
         const mesh = scene.getObjectByName(meshProp.name);
         if (mesh) {
           const { position, rotation, scale } = meshProp.properties;
@@ -29,17 +29,20 @@ const Model: React.FC<ModelProps> = ({ modelUrl, modelData }) => {
             mesh.visible = !meshProp.properties.hidden;
           }
           if (meshProp.properties.mesh_color) {
-            mesh.material.color.setStyle(meshProp.properties.mesh_color);
+            // @ts-expect-error - material collection type is not correct
+            (mesh as Mesh).material.color.setStyle(meshProp.properties.mesh_color);
           }
           if (meshProp.properties.mesh_transparency !== undefined) {
-            mesh.material.opacity = 1 - meshProp.properties.mesh_transparency;
-            mesh.material.transparent = mesh.material.opacity < 1;
+            // @ts-expect-error - material collection type is not correct 
+            (mesh as Mesh).material.opacity = 1 - meshProp.properties.mesh_transparency;
+            // @ts-expect-error - material collection type is not correct
+            (mesh as Mesh).material.transparent = (mesh as Mesh).material.opacity < 1;
           }
         }
       }
       });
     }
-  }, [modelData, nodes]);
+  }, [modelData, nodes, scene]);
 
   
   return <primitive object={scene} />;
